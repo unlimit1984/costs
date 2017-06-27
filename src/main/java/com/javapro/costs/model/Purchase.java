@@ -6,7 +6,7 @@ import java.time.LocalDate;
 /**
  * Created by Vladimir on 20.03.2017.
  */
-public class Purshase {
+public class Purchase {
     Integer id;
     BigDecimal money;
     LocalDate createdDate;
