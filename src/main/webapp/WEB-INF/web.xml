@@ -5,5 +5,20 @@
          version="3.1">
 
     <display-name>Costs for everyone</display-name>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            /WEB-INF/spring/applicationContext.xml
+            /WEB-INF/spring/spring-security-context.xml
+        </param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <session-config>
+        <session-timeout>40</session-timeout>
+    </session-config>
 
 </web-app>
