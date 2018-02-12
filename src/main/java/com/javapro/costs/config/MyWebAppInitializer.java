@@ -9,12 +9,12 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 public class MyWebAppInitializer implements WebApplicationInitializer {
-    @Override
+
     public void onStartup(javax.servlet.ServletContext container) throws ServletException {
 
         // Create the 'root' Spring application context
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(AppConfig.class);
+        rootContext.register(AppConfig.class, SecurityConfig.class);
 
         // Manage the lifecycle of the root application context
         container.addListener(new ContextLoaderListener(rootContext));
