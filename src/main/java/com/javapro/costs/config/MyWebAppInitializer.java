@@ -1,32 +1,34 @@
 package com.javapro.costs.config;
 
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
+//public class MyWebAppInitializer implements WebApplicationInitializer {
+//
+//    public void onStartup(javax.servlet.ServletContext container) throws ServletException {
+//        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+//        dispatcherContext.register(DispatcherMvcConfig.class);
+//
+//        ServletRegistration.Dynamic dispatcher =
+//                container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
+//        dispatcher.setLoadOnStartup(1);
+//        dispatcher.addMapping("/");
+//    }
+//}
 
-public class MyWebAppInitializer implements WebApplicationInitializer {
+public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-    public void onStartup(javax.servlet.ServletContext container) throws ServletException {
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class[]{AppConfig.class, SecurityConfig.class};
+    }
 
-        // Create the 'root' Spring application context
-        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(AppConfig.class, SecurityConfig.class);
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[]{DispatcherMvcConfig.class};
+    }
 
-        // Manage the lifecycle of the root application context
-        container.addListener(new ContextLoaderListener(rootContext));
-
-        // Create the dispatcher servlet's Spring application context
-        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-        dispatcherContext.register(DispatcherMvcConfig.class);
-
-        // Register and map the dispatcher servlet
-        ServletRegistration.Dynamic dispatcher =
-                container.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
-        dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/");
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
     }
 }
