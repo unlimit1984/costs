@@ -30,6 +30,8 @@
         <spring.version>5.0.3.RELEASE</spring.version>
         <spring.security.version>4.2.3.RELEASE</spring.security.version>
 
+        <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
+
         <lombok.version>1.16.16</lombok.version>
 
     </properties>
@@ -73,6 +75,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>org.thymeleaf</groupId>
+            <artifactId>thymeleaf-spring4</artifactId>
+            <version>${thymeleaf.version}</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -81,21 +89,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf -->
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf-spring5</artifactId>
-            <version>3.0.9.RELEASE</version>
-        </dependency>
-
-
-        <!--Spring MVC-->
-        <!--<dependency>-->
-        <!--<groupId>org.springframework</groupId>-->
-        <!--<artifactId>spring-web</artifactId>-->
-        <!--<version>${spring.version}</version>-->
-        <!--</dependency>-->
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -103,11 +96,11 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-context-support</artifactId>-->
+            <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
 
         <!--DB-->
         <dependency>
