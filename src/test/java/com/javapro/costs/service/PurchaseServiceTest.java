@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 public class PurchaseServiceTest {
     @Test
     public void get() throws Exception {
+
     }
 
     @Test
