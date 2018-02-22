@@ -4,6 +4,7 @@
 * [How to download](#how-to-download)
 * [How to test](#how-to-test)
 * [How to run](#how-to-run)
+* [History of changes](#history-of-changes)
 
 ## Short description
 
@@ -28,6 +29,6 @@ Finally get simple diagram with customized (daily, monthly, annual) statistics o
 4. mvn tomcat7:run
 5. go http://localhost:8080/costs
 
-###History of changes
+### History of changes
  - add apache maven plugin
  - add Thymeleaf configuration
