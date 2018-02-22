@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase List</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron" style="padding: 1px 20px 20px 20px; margin: 0;">
+        <h3><a href="./">Main page</a></h3>
+        <hr>
+        <h3>Purchases</h3>
+
+        <a href="./purchase/add">Add new</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Money</th>
+                <th>CreatedDate</th>
+                <th>Category</th>
+                <th>Comment</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="purchase : ${purchases}">
+                <td th:text="${purchase}"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <div class="btn-group">
+                        <input type="button"
+                               class="btn btn-primary"
+                               onclick="location.href='./purchase/id?id=${purchase.id}'"
+                               value="Edit">
+                        <input type="button"
+                               class="btn btn-danger"
+                               onclick="location.href='./purchase/removeUser?id=${purchase.id}'"
+                               value="Delete">
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,6 +1,7 @@
-package com.javapro.costs.repository;
+package com.javapro.costs.repository.memory;
 
 import com.javapro.costs.model.Purchase;
+import com.javapro.costs.repository.PurchaseRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 /**
@@ -15,11 +17,11 @@ import java.util.stream.Collectors;
  */
 public class InMemoryPurchaseRepositoryImpl implements PurchaseRepository {
 
-    private Map<Integer, Purchase> repository = new ConcurrentHashMap<>();
-    private AtomicInteger counter = new AtomicInteger(0);
+    private Map<Long, Purchase> repository = new ConcurrentHashMap<>();
+    private AtomicLong counter = new AtomicLong(0);
 
     @Override
-    public Purchase get(int id) {
+    public Purchase get(long id) {
         return repository.get(id);
     }
 
@@ -33,7 +35,7 @@ public class InMemoryPurchaseRepositoryImpl implements PurchaseRepository {
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(long id) {
         return repository.remove(id) != null;
     }
 

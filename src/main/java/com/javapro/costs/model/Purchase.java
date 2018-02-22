@@ -10,8 +10,8 @@ import java.time.LocalDate;
  */
 @Data
 public class Purchase {
-    Integer id;
-    BigDecimal money;
+    Long id;
+    double money;
     LocalDate createdDate;
     String category;
     String comment;
