@@ -2,7 +2,8 @@ package com.javapro.costs.service;
 
 import com.javapro.costs.exception.NotFoundException;
 import com.javapro.costs.model.Purchase;
-import com.javapro.costs.repository.datajpa.DataJpaPurchaseRepositoryImpl;
+import com.javapro.costs.repository.datajpa.DataJpaPurchaseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -11,8 +12,12 @@ import java.util.List;
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
 
+    //@Autowired
+    private DataJpaPurchaseRepository repository;
 
-    private DataJpaPurchaseRepositoryImpl repository;
+//    public PurchaseServiceImpl(DataJpaPurchaseRepository repository) {
+//        this.repository = repository;
+//    }
 
     @Override
     public Purchase get(long id) throws NotFoundException {
@@ -45,6 +50,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public List<Purchase> getBetweenDateTimes(LocalDate start, LocalDate end) {
-        return repository.getBetween(start, end);
+        //return repository.getBetween(start, end);
+        return null;
     }
 }

@@ -3,24 +3,34 @@ package com.javapro.costs.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Properties;
 
 @Configuration
 @ComponentScan({
         "com.javapro.costs.repository.datajpa",
         "com.javapro.costs.service"
 })
+@EnableJpaRepositories("com.javapro.costs.repository.datajpa")
+@EnableTransactionManagement
 public class AppConfig {
 
 
     @Bean
     public DataSource dataSource() {
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        builder.setType(EmbeddedDatabaseType.DERBY).addScript("init_db.sql").addScript("populate_db.sql");
+        builder.setType(EmbeddedDatabaseType.DERBY).addScript("db/init_db.sql").addScript("db/populate_db_dev.sql");
         return builder.build();
     }
 
@@ -29,4 +39,36 @@ public class AppConfig {
         return new JdbcTemplate(dataSource());
     }
 
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+        em.setDataSource(dataSource());
+        em.setPackagesToScan("com.javapro.costs.model");
+        em.setJpaVendorAdapter(jpaVendorAdapter());
+        em.setJpaProperties(jpaProperties());
+        return em;
+    }
+
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        return hibernateJpaVendorAdapter;
+    }
+
+    private Properties jpaProperties() {
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", "org.hibernate.dialect.DerbyDialect");
+        // properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+        properties.put("hibernate.show_sql", "true");
+        properties.put("hibernate.format_sql", "true");
+        properties.put("hibernate.use_sql_comments", "true");
+        return properties;
+    }
+
+    @Bean
+    public JpaTransactionManager entityManagerFactory(EntityManagerFactory emf){
+        JpaTransactionManager tm = new JpaTransactionManager();
+        tm.setEntityManagerFactory(emf);
+        return tm;
+    }
 }
