@@ -27,10 +27,11 @@
 
         <junit.version>4.12</junit.version>
 
-        <spring.version>5.0.2.RELEASE</spring.version>
-
+        <spring.version>4.3.14.RELEASE</spring.version>
+        <!--<spring.version>5.0.2.RELEASE</spring.version>-->
+        <spring-data-jpa.version>1.11.10.RELEASE</spring-data-jpa.version>
+        <!--<spring.security.version>5.0.2.RELEASE</spring.security.version>-->
         <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
-
         <lombok.version>1.16.16</lombok.version>
 
     </properties>
@@ -48,13 +49,13 @@
                     <!--2nd approach-->
                     <!--<source>${java.version}</source>-->
                     <!--<target>${java.version}</target>-->
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                            <version>${lombok.version}</version>
-                        </path>
-                    </annotationProcessorPaths>
+                    <!--<annotationProcessorPaths>-->
+                        <!--<path>-->
+                            <!--<groupId>org.projectlombok</groupId>-->
+                            <!--<artifactId>lombok</artifactId>-->
+                            <!--<version>${lombok.version}</version>-->
+                        <!--</path>-->
+                    <!--</annotationProcessorPaths>-->
                 </configuration>
             </plugin>
 
@@ -103,15 +104,28 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.0</version>
+            <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-web</artifactId>-->
+            <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
+
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-context</artifactId>-->
+            <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
 
 
         <dependency>
@@ -130,6 +144,15 @@
             <!--<scope>test</scope>-->
         </dependency>
 
+        <!--for @Transactional-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-tx</artifactId>-->
+            <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
+
+
+
         <!--spring-jdbc-->
         <!--<dependency>-->
             <!--<groupId>org.springframework</groupId>-->
@@ -142,7 +165,7 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>2.0.4.RELEASE</version>
+            <version>${spring-data-jpa.version}</version>
         </dependency>
 
         <!-- Hibernate -->
@@ -154,26 +177,26 @@
 
 
         <!-- Spring Security -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security</groupId>-->
+            <!--<artifactId>spring-security-web</artifactId>-->
+            <!--<version>${spring.security.version}</version>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security</groupId>-->
+            <!--<artifactId>spring-security-config</artifactId>-->
+            <!--<version>${spring.security.version}</version>-->
+        <!--</dependency>-->
 
 
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.projectlombok</groupId>-->
+            <!--<artifactId>lombok</artifactId>-->
+            <!--<version>${lombok.version}</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
 
         <!-- https://mvnrepository.com/artifact/junit/junit -->

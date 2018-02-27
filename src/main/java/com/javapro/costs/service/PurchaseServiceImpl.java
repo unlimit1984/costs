@@ -12,12 +12,8 @@ import java.util.List;
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
 
-    //@Autowired
+    @Autowired
     private DataJpaPurchaseRepository repository;
-
-//    public PurchaseServiceImpl(DataJpaPurchaseRepository repository) {
-//        this.repository = repository;
-//    }
 
     @Override
     public Purchase get(long id) throws NotFoundException {
@@ -40,7 +36,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public void delete(long id) throws NotFoundException {
-        repository.deleteById(id);
+        //repository.deleteById(id);
+        repository.delete(id);
     }
 
     @Override
