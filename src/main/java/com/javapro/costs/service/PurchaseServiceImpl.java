@@ -17,7 +17,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public Purchase get(long id) throws NotFoundException {
-        Purchase result = repository.getOne(id);
+//        Purchase result = repository.getOne(id);
+        Purchase result = repository.findOne(id);
         if (result == null) {
             throw new NotFoundException("Can't find purchase with id=" + id);
         }
