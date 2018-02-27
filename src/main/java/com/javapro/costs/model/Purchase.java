@@ -1,34 +1,72 @@
 package com.javapro.costs.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 
 /**
  * Created by Vladimir on 20.03.2017.
  */
-@Data
+//@Data
 @Entity
 @Table(name = "purchase")
 public class Purchase {
     @Id
     @GeneratedValue
-    Long id;
+    private Long id;
 
-    @Column
-    double money;
+    @Column(name = "money")
+    private double money;
 
-    @Column
-    LocalDate createdDate;
+    @Column(name = "created_date")
+    private LocalDate createdDate;
 
-    @Column
-    String category;
+    @Column(name = "category")
+    private String category;
 
-    @Column
-    String comment;
+    @Column(name = "comment")
+    private String comment;
 
     public Purchase() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public boolean isNew() {
