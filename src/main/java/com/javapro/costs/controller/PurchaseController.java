@@ -59,7 +59,7 @@ public class PurchaseController {
     @RequestMapping(value = "/purchase/removePurchase")
     public String remove(@RequestParam("id") long purchaseId) {
         service.delete(purchaseId);
-        return "redirect:/users";
+        return "redirect:/purchases";
     }
 
 

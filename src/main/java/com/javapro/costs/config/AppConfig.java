@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.orm.hibernate4.HibernateExceptionTranslator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -21,12 +20,8 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan({
-        "com.javapro.costs"
+        "com.javapro.costs.service"
 })
-//@ComponentScan({
-//        "com.javapro.costs.model",
-//        "com.javapro.costs.service"
-//})
 @EnableJpaRepositories("com.javapro.costs.repository.datajpa")
 @EnableTransactionManagement
 public class AppConfig {
@@ -70,26 +65,16 @@ public class AppConfig {
         return properties;
     }
 
-//    @Bean
-//    public PlatformTransactionManager entityManagerFactory(EntityManagerFactory entityManagerFactory){
-//        JpaTransactionManager tm = new JpaTransactionManager();
-//        tm.setEntityManagerFactory(entityManagerFactory);
-//        return tm;
-//    }
-
     @Bean
     public PlatformTransactionManager transactionManager() {
         EntityManagerFactory factory = entityManagerFactory().getObject();
         return new JpaTransactionManager(factory);
     }
 
+//    Only with <spring.version>4.3.14.RELEASE</spring.version>
+//    with spring5 not working
 //    @Bean
-//    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-//        return new PersistenceExceptionTranslationPostProcessor();
+//    public HibernateExceptionTranslator hibernateExceptionTranslator() {
+//        return new HibernateExceptionTranslator();
 //    }
-
-    @Bean
-    public HibernateExceptionTranslator hibernateExceptionTranslator() {
-        return new HibernateExceptionTranslator();
-    }
 }

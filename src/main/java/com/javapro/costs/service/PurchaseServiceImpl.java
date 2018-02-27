@@ -37,7 +37,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public void delete(long id) throws NotFoundException {
-        //repository.deleteById(id);
         repository.delete(id);
     }
 
@@ -48,7 +47,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public List<Purchase> getBetweenDateTimes(LocalDate start, LocalDate end) {
-        //return repository.getBetween(start, end);
-        return null;
+        return repository.getBetween(start, end);
     }
 }
