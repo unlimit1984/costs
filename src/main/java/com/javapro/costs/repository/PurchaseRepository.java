@@ -10,11 +10,11 @@ import java.util.List;
  * Created by Vladimir_Vysokomorny on 29-Jun-17.
  */
 public interface PurchaseRepository {
-    Purchase get(int id);
+    Purchase get(long id);
 
     Purchase save(Purchase purchase);
 
-    boolean delete(int id);
+    boolean delete(long id);
 
     List<Purchase> getAll();
 

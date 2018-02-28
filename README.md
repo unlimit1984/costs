@@ -1,4 +1,8 @@
-# Costs
+Costs
+=====
+
+[![Build Status](https://travis-ci.org/unlimit1984/costs.svg?branch=master)](https://travis-ci.org/unlimit1984/costs)
+[![Coverage Status](https://coveralls.io/repos/github/unlimit1984/costs/badge.svg)](https://coveralls.io/github/unlimit1984/costs)
 
 * [Short description](#short-description)
 * [How to download](#how-to-download)
