@@ -47,7 +47,6 @@
 
     <build>
         <finalName>costs</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -93,10 +92,7 @@
                     <aggregate>true</aggregate>
                 </configuration>
             </plugin>
-
         </plugins>
-
-
     </build>
 
     <dependencies>
