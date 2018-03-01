@@ -45,11 +45,11 @@
                     <div class="btn-group">
                         <input type="button"
                                class="btn btn-primary"
-                               onclick="location.href='./purchase/id?id=${purchase.id}'"
+                               th:onclick="'location.href=\'./purchase/id?id=\'' + ${purchase.id}"
                                value="Edit">
                         <input type="button"
                                class="btn btn-danger"
-                               onclick="location.href='./purchase/removePurchase?id=${purchase.id}'"
+                               th:onclick="'location.href=\'./purchase/removePurchase?id=\'' + ${purchase.id}"
                                value="Delete">
                     </div>
                 </td>
