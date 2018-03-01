@@ -112,12 +112,13 @@
             <!--<artifactId>thymeleaf-spring5</artifactId>-->
             <!--<version>${thymeleaf.version}</version>-->
         <!--</dependency>-->
+
         <!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-java8time -->
-        <!--<dependency>-->
-            <!--<groupId>org.thymeleaf.extras</groupId>-->
-            <!--<artifactId>thymeleaf-extras-java8time</artifactId>-->
-            <!--<version>3.0.1.RELEASE</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-java8time</artifactId>
+            <version>3.0.1.RELEASE</version>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.beans.PropertyEditorSupport;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +23,15 @@ public class PurchaseController {
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(LocalDateTime.class, new PropertyEditorSupport() {
+        binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
-                setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm")));
+                setValue(LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             }
 
             @Override
             public String getAsText() throws IllegalArgumentException {
-                return DateTimeFormatter.ofPattern("yyyy-MM-dd").format((LocalDateTime) getValue());
+                return DateTimeFormatter.ofPattern("yyyy-MM-dd").format((LocalDate) getValue());
             }
         });
     }
