@@ -17,7 +17,7 @@
 
 <div class="container">
     <div class="jumbotron" style="padding: 1px 20px 20px 20px; margin: 0;">
-        <h3><a href="./">Main page</a></h3>
+        <h3><a href="../">Main page</a></h3>
         <hr>
         <h3>Purchase</h3>
 
@@ -34,7 +34,7 @@
                 <input type="text" class="form-control" id="money" name="money"
                        required="required"
                        pattern="(\d{1,5})([\.])(\d{2})"
-                       th:value="*{purchase.money}">
+                       th:value="${#numbers.formatDecimal(purchase.money,1,2)}">
             </div>
 
 
