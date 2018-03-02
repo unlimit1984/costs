@@ -23,7 +23,7 @@
     <div class="jumbotron" style="padding: 1px 20px 20px 20px; margin: 0;">
         <h2><a href="./">Main page</a></h2>
         <hr>
-        <p>Welcome page</p>
+        <a href="purchases">Purchases</a><br>
     </div>
 </div>
 </body>
