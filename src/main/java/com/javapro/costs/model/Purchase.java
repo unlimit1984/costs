@@ -10,7 +10,10 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "purchase")
 public class Purchase {
+
     @Id
+//    @SequenceGenerator(name = "global_seq", sequenceName = "global_seq", allocationSize = 1, initialValue = 0)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "global_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -27,6 +30,13 @@ public class Purchase {
     private String comment;
 
     public Purchase() {
+    }
+
+    public Purchase(double money, LocalDate createdDate, String category, String comment) {
+        this.money = money;
+        this.createdDate = createdDate;
+        this.category = category;
+        this.comment = comment;
     }
 
     public Long getId() {
