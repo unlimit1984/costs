@@ -82,4 +82,15 @@ public class Purchase {
     public boolean isNew() {
         return id != null;
     }
+
+    @Override
+    public String toString() {
+        return "Purchase{" +
+                "id=" + id +
+                ", money=" + money +
+                ", createdDate=" + createdDate +
+                ", category='" + category + '\'' +
+                ", comment='" + comment + '\'' +
+                '}';
+    }
 }
