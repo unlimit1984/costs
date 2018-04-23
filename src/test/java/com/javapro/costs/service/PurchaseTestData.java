@@ -35,4 +35,9 @@ public class PurchaseTestData {
     public static final Purchase EXPECTED_PURCHASE1 = new Purchase(MONEY1, CREATED_DATE1, CATEGORY1, COMMENT1);
     public static final Purchase EXPECTED_PURCHASE2 = new Purchase(MONEY2, CREATED_DATE2, CATEGORY2, COMMENT2);
     public static final Purchase EXPECTED_PURCHASE3 = new Purchase(MONEY3, CREATED_DATE3, CATEGORY3, COMMENT3);
+
+    public static final long PURCHASE1_ID = 0;
+    public static final long PURCHASE2_ID = 1;
+    public static final long PURCHASE3_ID = 2;
+    public static final long PURCHASE_NOT_FOUND_ID = 99999;
 }

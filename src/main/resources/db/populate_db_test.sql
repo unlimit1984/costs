@@ -1,4 +1,5 @@
-delete from purchase;
+DELETE FROM purchase;
+ALTER TABLE purchase ALTER COLUMN id RESTART WITH 0;
 
--- DROP SEQUENCE global_seq;
--- CREATE SEQUENCE global_seq AS BIGINT START WITH 0;
+--  DROP SEQUENCE global_seq RESTRICT;
+--  CREATE SEQUENCE global_seq AS BIGINT START WITH 0;

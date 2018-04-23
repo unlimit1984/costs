@@ -18,6 +18,7 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import static com.javapro.costs.service.PurchaseTestData.*;
+import static org.junit.Assert.fail;
 
 /**
  * Created by Vladimir_Vysokomorny on 29-Jun-17.
@@ -43,19 +44,19 @@ public class PurchaseServiceTest {
 
     @Test
     public void get() {
-        Purchase actualPurchase = service.get(1);
+        Purchase actualPurchase = service.get(PURCHASE2_ID);
         MATCHER.assertEquals(EXPECTED_PURCHASE2, actualPurchase);
     }
 
     @Test
-    public void getAll() throws Exception {
+    public void getAll() {
         MATCHER.assertCollectionEquals(
                 Arrays.asList(EXPECTED_PURCHASE1, EXPECTED_PURCHASE2, EXPECTED_PURCHASE3),
                 service.getAll());
     }
 
     @Test
-    public void getBetweenDateTimes() throws Exception {
+    public void getBetweenDateTimes() {
         MATCHER.assertCollectionEquals(
                 Arrays.asList(EXPECTED_PURCHASE2, EXPECTED_PURCHASE3),
                 service.getBetweenDateTimes(
@@ -65,12 +66,41 @@ public class PurchaseServiceTest {
     }
 
     @Test
-    public void update() throws Exception {
+    public void update() {
+
+        Purchase updated = new Purchase(
+                1000,
+                LocalDate.of(3000, 1, 1),
+                "myCategory",
+                "myComment");
+        updated.setId(PURCHASE1_ID);
+
+        service.save(updated);
+        MATCHER.assertEquals(updated, service.get(PURCHASE1_ID));
+
 
     }
 
     @Test
-    public void delete() throws Exception {
+    public void delete() {
+        service.delete(PURCHASE2_ID);
+
+        MATCHER.assertCollectionEquals(
+                Arrays.asList(EXPECTED_PURCHASE1, EXPECTED_PURCHASE3),
+                service.getAll()
+                        .stream()
+                        .sorted(Comparator.comparing(Purchase::getCreatedDate)).collect(Collectors.toList()));
+    }
+
+    @Test
+    public void testDeleteNotFound() {
+        try {
+            service.delete(PURCHASE_NOT_FOUND_ID);
+            fail("Should call DeleteNotFoundException during deleting not existing Purchase");
+        } catch (Exception e) {
+            //TODO I want NotFoundException here
+            //} catch (NotFoundException e){
+        }
     }
 
 }
