@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
@@ -17,8 +16,8 @@ import java.util.stream.Collectors;
  */
 public class InMemoryPurchaseRepositoryImpl implements PurchaseRepository {
 
-    private Map<Long, Purchase> repository = new ConcurrentHashMap<>();
-    private AtomicLong counter = new AtomicLong(0);
+    private final Map<Long, Purchase> repository = new ConcurrentHashMap<>();
+    private final AtomicLong counter = new AtomicLong(0);
 
     @Override
     public Purchase get(long id) {

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public class ModelMatcher<T> {
 
-    private Comparator<T> comparator;
+    private final Comparator<T> comparator;
 
     public ModelMatcher() {
         this((T expected, T actual) ->
@@ -24,7 +24,7 @@ public class ModelMatcher<T> {
     }
 
     private class Wrapper {
-        private T entity;
+        private final T entity;
 
         private Wrapper(T entity) {
             this.entity = entity;
@@ -53,11 +53,11 @@ public class ModelMatcher<T> {
         Assert.assertEquals(wrap(expected), wrap(actual));
     }
 
-    public Wrapper wrap(T entity) {
+    private Wrapper wrap(T entity) {
         return new Wrapper(entity);
     }
 
-    public List<Wrapper> wrap(Collection<T> collection) {
+    private List<Wrapper> wrap(Collection<T> collection) {
         return collection.stream().map(this::wrap).collect(Collectors.toList());
     }
 }

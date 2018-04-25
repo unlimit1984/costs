@@ -1,7 +1,6 @@
 package com.javapro.costs.config;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,8 +19,12 @@ public class DispatcherMvcConfig {
 //2nd approach
 //public class DispatcherMvcConfig  implements WebMvcConfigurer {
 
-    @Autowired
-    ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
+
+    //@Autowired//You can ignore this (https://spring.io/blog/2016/03/04/core-container-refinements-in-spring-framework-4-3)
+    public DispatcherMvcConfig(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {

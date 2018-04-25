@@ -1,10 +1,9 @@
 package com.javapro.costs.service;
 
-import com.javapro.costs.exception.NotFoundException;
+import com.javapro.costs.util.exception.NotFoundException;
 import com.javapro.costs.model.Purchase;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

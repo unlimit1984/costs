@@ -3,7 +3,6 @@ package com.javapro.costs.repository;
 import com.javapro.costs.model.Purchase;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

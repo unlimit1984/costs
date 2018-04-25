@@ -1,4 +1,4 @@
-package com.javapro.costs.exception;
+package com.javapro.costs.util.exception;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message) {
