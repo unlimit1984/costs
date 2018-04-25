@@ -51,6 +51,16 @@
             </tbody>
         </table>
 
+        <hr>
+
+        <ul class="pagination">
+            <li><a href="./purchases?page=1">1</a></li>
+            <li><a th:href="${'./purchases?page=' + ( (page<=1) ? 1 : (page - 1))}">&lt;</a></li>
+            <li class="active"><a th:href="${'./purchases?page=' + page}"><span th:text="${page}"/></a></li>
+            <li><a th:href="${'./purchases?page=' + ((page>=totalPages) ? totalPages : (page + 1)) }">&gt;</a></li>
+            <li><a th:href="${'./purchases?page=' + totalPages}"><span th:text="${totalPages}"/></a></li>
+        </ul>
+
     </div>
 </div>
 </body>

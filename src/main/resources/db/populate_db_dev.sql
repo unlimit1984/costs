@@ -1,4 +1,32 @@
 DELETE FROM purchase;
 
-INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', 'bread and tea');
-INSERT INTO purchase(money, created_date, category, comment) VALUES(100, '2018-04-28 13:45:59', 'meal', 'milk');
+-- INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', 'bread and tea');
+-- INSERT INTO purchase(money, created_date, category, comment) VALUES(100, '2018-04-28 13:45:59', 'meal', 'milk');
+
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '1');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '2');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '3');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '4');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '5');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '6');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '7');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '8');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '9');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '10');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '11');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '12');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '13');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '14');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '15');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '16');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '17');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '18');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '19');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '20');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '21');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '22');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '23');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '24');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '25');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '26');
+INSERT INTO purchase(money, created_date, category, comment) VALUES(100, CURRENT TIMESTAMP, 'meal', '27');
