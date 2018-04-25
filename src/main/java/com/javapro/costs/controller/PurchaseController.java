@@ -2,6 +2,8 @@ package com.javapro.costs.controller;
 
 import com.javapro.costs.model.Purchase;
 import com.javapro.costs.service.PurchaseService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -11,8 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.beans.PropertyEditorSupport;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class PurchaseController {
@@ -49,12 +49,28 @@ public class PurchaseController {
         return mav;
     }
 
-
+    //    @RequestMapping("/purchases")
+//    public ModelAndView getAll() {
+//        ModelAndView mav = new ModelAndView("purchases");
+//        List<Purchase> events = new ArrayList<>(service.getAll());
+//        mav.addObject("purchases", events);
+//        return mav;
+//    }
     @RequestMapping("/purchases")
-    public ModelAndView getAll() {
+    public ModelAndView getPageable(@RequestParam(required = false) Integer page) {
         ModelAndView mav = new ModelAndView("purchases");
-        List<Purchase> events = new ArrayList<>(service.getAll());
-        mav.addObject("purchases", events);
+
+        if (page == null || page < 1) {
+            page = 1;
+        }
+        int pageLimit = 5;
+        Page<Purchase> resultPage = service.getAllPageable(new PageRequest(page - 1, pageLimit));
+        mav.addObject("purchases", resultPage.getContent());
+        mav.addObject("totalPages", resultPage.getTotalPages());
+//        mav.addObject("pageLimit", pageLimit);
+        mav.addObject("page", page);
+
+
         return mav;
     }
 

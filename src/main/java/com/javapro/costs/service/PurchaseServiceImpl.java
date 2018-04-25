@@ -3,6 +3,8 @@ package com.javapro.costs.service;
 import com.javapro.costs.model.Purchase;
 import com.javapro.costs.repository.datajpa.DataJpaPurchaseRepository;
 import com.javapro.costs.util.exception.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -45,6 +47,11 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public List<Purchase> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<Purchase> getAllPageable(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override
