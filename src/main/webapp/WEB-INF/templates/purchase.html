@@ -12,63 +12,253 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <style>
+        .popover {
+            min-width: 140px ! important;
+        }
+
+        .icon-small {
+            height: 18px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .icon-medium {
+            height: 22px;
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+
+            var polImgLink = "http://www.roemheld.de/IT/Data/Images/Address/Polen.gif";
+            var engImgLink = "http://www.roemheld.de/IT/Data/Images/Address/Grossbritanien.gif";
+            var rusImgLink = "http://www.roemheld.de/IT/Data/Images/Address/Russland.gif";
+            var deuImgLink = "http://www.roemheld.de/IT/Data/Images/Address/Deutschland.gif";
+            var fraImgLink = "http://www.roemheld.de/IT/Data/Images/Address/Frankreich.gif";
+
+            var imgBtnSel = $('#imgBtnSel');
+            var imgBtnPol = $('#imgBtnPol');
+            var imgBtnEng = $('#imgBtnEng');
+            var imgBtnRus = $('#imgBtnRus');
+            var imgBtnDeu = $('#imgBtnDeu');
+            var imgBtnFra = $('#imgBtnFra');
+
+            var imgNavSel = $('#imgNavSel');
+            var imgNavPol = $('#imgNavPol');
+            var imgNavEng = $('#imgNavEng');
+            var imgNavRus = $('#imgNavRus');
+            var imgNavDeu = $('#imgNavDeu');
+            var imgNavFra = $('#imgNavFra');
+
+            var spanNavSel = $('#lanNavSel');
+            var spanBtnSel = $('#lanBtnSel');
+
+            imgBtnSel.attr("src", polImgLink);
+            imgBtnPol.attr("src", polImgLink);
+            imgBtnEng.attr("src", engImgLink);
+            imgBtnRus.attr("src", rusImgLink);
+            imgBtnDeu.attr("src", deuImgLink);
+            imgBtnFra.attr("src", fraImgLink);
+
+            imgNavSel.attr("src", polImgLink);
+            imgNavPol.attr("src", polImgLink);
+            imgNavEng.attr("src", engImgLink);
+            imgNavRus.attr("src", rusImgLink);
+            imgNavDeu.attr("src", deuImgLink);
+            imgNavFra.attr("src", fraImgLink);
+
+            $(".language").on("click", function (event) {
+                var currentId = $(this).attr('id');
+
+                if (currentId == "navPol") {
+                    imgNavSel.attr("src", polImgLink);
+                    spanNavSel.text("PL");
+                } else if (currentId == "navEng") {
+                    imgNavSel.attr("src", engImgLink);
+                    spanNavSel.text("ENG");
+                } else if (currentId == "navRus") {
+                    imgNavSel.attr("src", rusImgLink);
+                    spanNavSel.text("RU");
+                } else if (currentId == "navDeu") {
+                    imgNavSel.attr("src", deuImgLink);
+                    spanNavSel.text("DEU");
+                } else if (currentId == "navFra") {
+                    imgNavSel.attr("src", fraImgLink);
+                    spanNavSel.text("FRA");
+                }
+
+                if (currentId == "btnPol") {
+                    imgBtnSel.attr("src", polImgLink);
+                    spanBtnSel.text("PL");
+                } else if (currentId == "btnEng") {
+                    imgBtnSel.attr("src", engImgLink);
+                    spanBtnSel.text("ENG");
+                } else if (currentId == "btnRus") {
+                    imgBtnSel.attr("src", rusImgLink);
+                    spanBtnSel.text("RU");
+                } else if (currentId == "btnDeu") {
+                    imgBtnSel.attr("src", deuImgLink);
+                    spanBtnSel.text("DEU");
+                } else if (currentId == "btnFra") {
+                    imgBtnSel.attr("src", fraImgLink);
+                    spanBtnSel.text("FRA");
+                }
+
+            });
+
+
+        });
+
+    </script>
+
 </head>
 <body>
 
-<div class="container">
-    <div class="jumbotron" style="padding: 1px 20px 20px 20px; margin: 0;">
-        <h3><a href="../">Main page</a></h3>
-        <hr>
-        <h3>Purchase</h3>
+<div class="jumbotron container navbar navbar-fixed-top" style="padding-top: 0; padding-bottom: 0; margin-bottom: 0;">
 
-        <form action="addPurchase" method="post">
-
-            <div class="form-group">
-                <label for="id">Id:</label>
-                <input type="text" class="form-control" id="id" name="id" readonly
-                       th:value="*{purchase.id}">
+    <nav class="navbar navbar-inverse" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Costs</a>
             </div>
 
-            <div class="form-group">
-                <label for="money">Money:</label>
-                <input type="text" class="form-control" id="money" name="money"
-                       required="required"
-                       pattern="(\d{1,5})([\.])(\d{2})"
-                       th:value="${#numbers.formatDecimal(purchase.money,1,2)}">
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Purchases</a></li>
+                    <li><a href="#">Users</a></li>
+                    <li><a href="#">Prices</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li>
+                        <button class="btn btn-danger navbar-btn"
+                                title="Mobile phone"
+                                data-content="+48(537)123-456"
+                                data-toggle="popover"
+                                data-placement="bottom"><span class="glyphicon glyphicon-earphone"></span> Call Us
+                        </button>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#"
+                           class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           role="button"
+                           aria-expanded="false">
+
+                            <img id="imgNavSel" src="" alt="..." class="img-thumbnail icon-small">  <span
+                                id="lanNavSel">PL</span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a id="navPol" href="#" class="language"> <img id="imgNavPol" src="" alt="..."
+                                                                               class="img-thumbnail icon-small">  <span
+                                    id="lanNavPol">Polski</span></a>
+                            </li>
+                            <li><a id="navEng" href="#" class="language"><img id="imgNavEng" src="" alt="..."
+                                                                              class="img-thumbnail icon-small">  <span
+                                    id="lanNavEng">English</span></a>
+                            </li>
+                            <li><a id="navRus" href="#" class="language"><img id="imgNavRus" src="" alt="..."
+                                                                              class="img-thumbnail icon-small">  <span
+                                    id="lanNavRus">Russian</span></a>
+                            </li>
+                            <li><a id="navFra" href="#" class="language"><img id="imgNavFra" src="" alt="..."
+                                                                              class="img-thumbnail icon-small">  <span
+                                    id="lanNavFra">Francais</span></a>
+                            </li>
+                            <li><a id="navDeu" href="#" class="language"> <img id="imgNavDeu" src="" alt="..."
+                                                                               class="img-thumbnail icon-small">  <span
+                                    id="lanNavDeu">Deutsch</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+
             </div>
 
+        </div>
+    </nav>
 
-            <div class="form-group">
-                <label for="createdDate">CreatedDate:</label>
-                <input type="date" class="form-control" id="createdDate" name="createdDate"
-                       placeholder="Enter date and time"
-                       required="required"
-                       th:value="*{purchase.createdDate}">
-            </div>
-
-            <div class="form-group">
-                <label for="category">Category:</label>
-                <input type="text" class="form-control" id="category" name="category"
-                       th:value="*{purchase.category}">
-            </div>
-
-            <div class="form-group">
-                <label for="category">Comment:</label>
-                <input type="text" class="form-control" id="comment" name="comment"
-                       th:value="*{purchase.comment}">
-            </div>
-
-            <div class="btn-group">
-                <button type="button" class="btn btn-warning" onclick="location.href='../purchases'">Cancel</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
-
-            <!--with CSRF-->
-            <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
-
-        </form>
-
-    </div>
 </div>
+
+<div class="jumbotron container text-center" style="padding: 0 20px 20px 20px; margin-bottom: 0; margin-top: 73px;">
+
+    <hr>
+    <h2><i>Purchase</i></h2>
+    <div class="row text-left">
+        <div class="col-xs-1"></div>
+
+        <div class="col-xs-10">
+            <form action="addPurchase" method="post">
+
+                <div class="form-group">
+                    <label for="id">Id:</label>
+                    <input type="text" class="form-control" id="id" name="id" readonly
+                           th:value="*{purchase.id}">
+                </div>
+
+                <div class="form-group">
+                    <label for="money">Money:</label>
+                    <input type="text" class="form-control" id="money" name="money"
+                           required="required"
+                           pattern="(\d{1,5})([\.])(\d{2})"
+                           th:value="${#numbers.formatDecimal(purchase.money,1,2)}">
+                </div>
+
+
+                <div class="form-group">
+                    <label for="createdDate">CreatedDate:</label>
+                    <input type="date" class="form-control" id="createdDate" name="createdDate"
+                           placeholder="Enter date and time"
+                           required="required"
+                           th:value="*{purchase.createdDate}">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <input type="text" class="form-control" id="category" name="category"
+                           th:value="*{purchase.category}">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Comment:</label>
+                    <input type="text" class="form-control" id="comment" name="comment"
+                           th:value="*{purchase.comment}">
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-warning" onclick="location.href='../purchases'">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+                <!--with CSRF-->
+                <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+
+            </form>
+
+        </div>
+
+        <div class="col-xs-1"></div>
+    </div>
+
+</div>
+
+<hr>
+<p class="text-center">Written and coded <a href="https://github.com/unlimit1984/costs" style="color: black !important"
+                                            target="_blank"><u>here</u></a></p>
+
 </body>
 </html>
