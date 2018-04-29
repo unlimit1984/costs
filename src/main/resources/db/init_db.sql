@@ -14,10 +14,10 @@ CREATE TABLE purchase (
 --CREATE SEQUENCE global_seq AS BIGINT START WITH 0;
 
 
-CREATE TABLE USERS (
+CREATE TABLE users (
   id           BIGINT           NOT NULL GENERATED ALWAYS AS IDENTITY ( START WITH 0, INCREMENT BY 1),
-  email        VARCHAR(250)     NOT NULL,
-  name         VARCHAR(250)     NOT NULL,
+  email        VARCHAR(50)      NOT NULL,
+  name         VARCHAR(50)      NOT NULL,
   created_date TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT primary_key_user PRIMARY KEY (id)
 );

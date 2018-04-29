@@ -17,8 +17,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ContextConfiguration(
         classes = AppConfigTest.class,
@@ -35,11 +34,8 @@ public class UserServiceTest {
     }
 
     @Test
-    public void get_returnsUserTest() {
-        User user = new User();
-        user.setEmail("tom@google.com");
-        user.setName("Tom");
-        user.setCreatedDate(LocalDate.now());
+    public void getReturnsUserTest() {
+        User user = getNewUser();
 
         when(userService.get(999999)).thenReturn(user);
         User fetchedUser = userService.get(999999);
@@ -49,19 +45,15 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getAllReturnAllUsers() {
+    public void getAllReturnAllUsersTest() {
         when(userService.getAll()).thenReturn(Arrays.asList(new User(), new User()));
         List<User> users = userService.getAll();
         assertTrue(users.size() == 2);
     }
 
     @Test
-    public void save_savesUsersToDb() {
-        User user = new User();
-        user.setEmail("tom@google.com");
-        user.setName("Tom");
-        user.setCreatedDate(LocalDate.now());
-
+    public void saveUsersToDbTest() throws Exception {
+        User user = getNewUser();
         when(userService.save(user)).thenReturn(user);
         when(userService.get(user.getId())).thenReturn(user);
         User savedUser = userService.save(user);
@@ -69,4 +61,19 @@ public class UserServiceTest {
         assertTrue(user.equals(fetchedUser));
     }
 
+    @Test
+    public void deleteUserTest() {
+        User user = getNewUser();
+        userService.delete(user.getId());
+        verify(userService).delete(user.getId());
+    }
+
+    private User getNewUser() {
+        User user = new User();
+        user.setId(100L);
+        user.setEmail("tom@google.com");
+        user.setName("Tom");
+        user.setCreatedDate(LocalDate.now());
+        return user;
+    }
 }

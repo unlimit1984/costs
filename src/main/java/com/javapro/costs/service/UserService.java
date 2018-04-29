@@ -14,4 +14,5 @@ public interface UserService {
 
     List<User> getAll();
 
+    void delete(long id) throws NotFoundException;
 }
