@@ -2,9 +2,12 @@ package com.javapro.costs.service;
 
 import com.javapro.costs.config.AppConfigTest;
 import com.javapro.costs.model.Purchase;
+import com.javapro.costs.util.exception.NotFoundException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -31,6 +34,8 @@ import static org.junit.Assert.fail;
 @Sql(scripts = "classpath:db/populate_db_test.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class PurchaseServiceTest {
 
+    private static final Logger LOG = LoggerFactory.getLogger(PurchaseServiceTest.class);
+
     @Autowired
     private PurchaseService service;
 
@@ -41,11 +46,25 @@ public class PurchaseServiceTest {
         service.save(new Purchase(MONEY3, CREATED_DATE3, CATEGORY3, COMMENT3));
     }
 
-
     @Test
     public void get() {
         Purchase actualPurchase = service.get(PURCHASE2_ID);
         MATCHER.assertEquals(EXPECTED_PURCHASE2, actualPurchase);
+    }
+
+//    @Test
+//    public void getNotFound() {
+//        try {
+//            service.get(PURCHASE_NOT_FOUND_ID);
+//            fail("Should cause NotFoundException for not existing id");
+//        } catch (NotFoundException e){
+//            LOG.info("getNotFound test throws NotFoundException. OK");
+//        }
+//
+//    }
+    @Test(expected = NotFoundException.class)
+    public void getNotFound() {
+        service.get(PURCHASE_NOT_FOUND_ID);
     }
 
     @Test
@@ -96,7 +115,7 @@ public class PurchaseServiceTest {
     public void testDeleteNotFound() {
         try {
             service.delete(PURCHASE_NOT_FOUND_ID);
-            fail("Should call DeleteNotFoundException during deleting not existing Purchase");
+            fail("Should call NotFoundException during deleting not existing Purchase");
         } catch (Exception e) {
             //TODO I want NotFoundException here
             //} catch (NotFoundException e){
