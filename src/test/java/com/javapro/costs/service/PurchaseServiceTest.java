@@ -68,6 +68,17 @@ public class PurchaseServiceTest {
     }
 
     @Test
+    public void getNotFound() {
+        try {
+            service.get(PURCHASE_NOT_FOUND_ID);
+            fail("Should cause NotFoundException for not existing id");
+        } catch (NotFoundException e){
+            LOG.info("getNotFound test throws NotFoundException. OK");
+        }
+
+    }
+
+    @Test
     public void getAll() {
         MATCHER.assertCollectionEquals(
                 Arrays.asList(EXPECTED_PURCHASE1, EXPECTED_PURCHASE2, EXPECTED_PURCHASE3),

@@ -3,6 +3,10 @@ package com.javapro.costs.service;
 import com.javapro.costs.model.Purchase;
 import com.javapro.costs.repository.datajpa.DataJpaPurchaseRepository;
 import com.javapro.costs.util.exception.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -10,6 +14,8 @@ import java.util.List;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(PurchaseServiceImpl.class);
 
     private final DataJpaPurchaseRepository repository;
 
@@ -22,6 +28,7 @@ public class PurchaseServiceImpl implements PurchaseService {
     public Purchase get(long id) throws NotFoundException {
         Purchase result = repository.findOne(id);
         if (result == null) {
+            LOG.info("\"Can't find purchase with id={}", id);
             throw new NotFoundException("Can't find purchase with id=" + id);
         }
         return result;
@@ -45,6 +52,11 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public List<Purchase> getAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<Purchase> getAllPageable(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override
