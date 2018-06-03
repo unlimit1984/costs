@@ -52,30 +52,9 @@ public class PurchaseServiceTest {
         MATCHER.assertEquals(EXPECTED_PURCHASE2, actualPurchase);
     }
 
-//    @Test
-//    public void getNotFound() {
-//        try {
-//            service.get(PURCHASE_NOT_FOUND_ID);
-//            fail("Should cause NotFoundException for not existing id");
-//        } catch (NotFoundException e){
-//            LOG.info("getNotFound test throws NotFoundException. OK");
-//        }
-//
-//    }
     @Test(expected = NotFoundException.class)
     public void getNotFound() {
         service.get(PURCHASE_NOT_FOUND_ID);
-    }
-
-    @Test
-    public void getNotFound() {
-        try {
-            service.get(PURCHASE_NOT_FOUND_ID);
-            fail("Should cause NotFoundException for not existing id");
-        } catch (NotFoundException e){
-            LOG.info("getNotFound test throws NotFoundException. OK");
-        }
-
     }
 
     @Test
@@ -129,6 +108,7 @@ public class PurchaseServiceTest {
             fail("Should call NotFoundException during deleting not existing Purchase");
         } catch (Exception e) {
             //TODO I want NotFoundException here
+            LOG.info("Should cause NotFoundException");
             //} catch (NotFoundException e){
         }
     }
