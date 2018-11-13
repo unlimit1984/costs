@@ -12,10 +12,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    UserDetails user = User.withDefaultPasswordEncoder().username("user").password("123").roles("USER").build();
-    UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("123").roles("ADMIN").build();
+    UserDetails user = User.withDefaultPasswordEncoder().username("user@mail.com").password("123").roles("USER").build();
+    UserDetails admin = User.withDefaultPasswordEncoder().username("admin@mail.com").password("123").roles("ADMIN").build();
 
     auth.inMemoryAuthentication().withUser(user);
     auth.inMemoryAuthentication().withUser(admin);
@@ -23,9 +24,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
+    http
+        .csrf().disable()
+        .authorizeRequests()
         .antMatchers("/test/**").access("hasRole('ROLE_ADMIN')")
         .antMatchers("/purchases/**").access("hasRole('ROLE_USER')")
-        .and().formLogin();
+        .antMatchers("/me/**").access("hasRole('ROLE_USER')")
+        .and()
+        .formLogin()
+        .loginPage("/login")
+        .failureUrl("/login?error=true")
+        .defaultSuccessUrl("/me")
+        .loginProcessingUrl("/perform_login")
+        .and()
+        .logout()
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/login?logout=true");
+
+
   }
 }
