@@ -12,20 +12,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        UserDetails user = User.withDefaultPasswordEncoder().username("user").password("123").roles("USER").build();
-        UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("123").roles("ADMIN").build();
+  @Autowired
+  public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    UserDetails user = User.withDefaultPasswordEncoder().username("user").password("123").roles("USER").build();
+    UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("123").roles("ADMIN").build();
 
-        auth.inMemoryAuthentication().withUser(user);
-        auth.inMemoryAuthentication().withUser(admin);
-    }
+    auth.inMemoryAuthentication().withUser(user);
+    auth.inMemoryAuthentication().withUser(admin);
+  }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/test/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/purchases/**").access("hasRole('ROLE_USER')")
-                .and().formLogin();
-    }
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests()
+        .antMatchers("/test/**").access("hasRole('ROLE_ADMIN')")
+        .antMatchers("/purchases/**").access("hasRole('ROLE_USER')")
+        .and().formLogin();
+  }
 }

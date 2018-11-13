@@ -12,61 +12,61 @@ import java.time.LocalDate;
 @Table(name = "users")
 public class User extends DomainObject {
 
-    @Column(name = "email")
-    private String email;
+  @Column(name = "email")
+  private String email;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name = "created_date")
-    private LocalDate createdDate;
+  @Column(name = "created_date")
+  private LocalDate createdDate;
 
-    public User() {
-    }
+  public User() {
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public LocalDate getCreatedDate() {
-        return createdDate;
-    }
+  public LocalDate getCreatedDate() {
+    return createdDate;
+  }
 
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
-    }
+  public void setCreatedDate(LocalDate createdDate) {
+    this.createdDate = createdDate;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
 
-        if (!(o instanceof User)) return false;
+    if (!(o instanceof User)) return false;
 
-        User user = (User) o;
+    User user = (User) o;
 
-        return new EqualsBuilder()
-                .append(email, user.email)
-                .append(name, user.name)
-                .isEquals();
-    }
+    return new EqualsBuilder()
+        .append(email, user.email)
+        .append(name, user.name)
+        .isEquals();
+  }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37)
-                .append(email)
-                .append(name)
-                .toHashCode();
-    }
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(17, 37)
+        .append(email)
+        .append(name)
+        .toHashCode();
+  }
 }

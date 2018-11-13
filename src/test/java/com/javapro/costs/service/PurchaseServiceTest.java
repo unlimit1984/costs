@@ -27,95 +27,95 @@ import static org.junit.Assert.fail;
  * Created by Vladimir_Vysokomorny on 29-Jun-17.
  */
 @ContextConfiguration(
-        classes = AppConfigTest.class,
-        loader = AnnotationConfigContextLoader.class
+    classes = AppConfigTest.class,
+    loader = AnnotationConfigContextLoader.class
 )
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populate_db_test.sql", config = @SqlConfig(encoding = "UTF-8"))
 public class PurchaseServiceTest {
 
-    private static final Logger LOG = LoggerFactory.getLogger(PurchaseServiceTest.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PurchaseServiceTest.class);
 
-    @Autowired
-    private PurchaseService service;
+  @Autowired
+  private PurchaseService service;
 
-    @Before
-    public void setUp() {
-        service.save(new Purchase(MONEY1, CREATED_DATE1, CATEGORY1, COMMENT1));
-        service.save(new Purchase(MONEY2, CREATED_DATE2, CATEGORY2, COMMENT2));
-        service.save(new Purchase(MONEY3, CREATED_DATE3, CATEGORY3, COMMENT3));
+  @Before
+  public void setUp() {
+    service.save(new Purchase(MONEY1, CREATED_DATE1, CATEGORY1, COMMENT1));
+    service.save(new Purchase(MONEY2, CREATED_DATE2, CATEGORY2, COMMENT2));
+    service.save(new Purchase(MONEY3, CREATED_DATE3, CATEGORY3, COMMENT3));
+  }
+
+  @Test
+  public void get() {
+    Purchase actualPurchase = service.get(PURCHASE2_ID);
+    MATCHER.assertEquals(EXPECTED_PURCHASE2, actualPurchase);
+  }
+
+  @Test
+  public void getNotFound() {
+    try {
+      service.get(PURCHASE_NOT_FOUND_ID);
+      fail("Should cause NotFoundException for not existing id");
+    } catch (NotFoundException e) {
+      LOG.info("getNotFound test throws NotFoundException. OK");
     }
 
-    @Test
-    public void get() {
-        Purchase actualPurchase = service.get(PURCHASE2_ID);
-        MATCHER.assertEquals(EXPECTED_PURCHASE2, actualPurchase);
+  }
+
+  @Test
+  public void getAll() {
+    MATCHER.assertCollectionEquals(
+        Arrays.asList(EXPECTED_PURCHASE1, EXPECTED_PURCHASE2, EXPECTED_PURCHASE3),
+        service.getAll());
+  }
+
+  @Test
+  public void getBetweenDateTimes() {
+    MATCHER.assertCollectionEquals(
+        Arrays.asList(EXPECTED_PURCHASE2, EXPECTED_PURCHASE3),
+        service.getBetweenDateTimes(
+            LocalDate.of(2018, 1, 10),
+            LocalDate.of(2018, 3, 15)
+        ).stream().sorted(Comparator.comparing(Purchase::getCreatedDate)).collect(Collectors.toList()));
+  }
+
+  @Test
+  public void update() {
+
+    Purchase updated = new Purchase(
+        1000,
+        LocalDate.of(3000, 1, 1),
+        "myCategory",
+        "myComment");
+    updated.setId(PURCHASE1_ID);
+
+    service.save(updated);
+    MATCHER.assertEquals(updated, service.get(PURCHASE1_ID));
+
+
+  }
+
+  @Test
+  public void delete() {
+    service.delete(PURCHASE2_ID);
+
+    MATCHER.assertCollectionEquals(
+        Arrays.asList(EXPECTED_PURCHASE1, EXPECTED_PURCHASE3),
+        service.getAll()
+            .stream()
+            .sorted(Comparator.comparing(Purchase::getCreatedDate)).collect(Collectors.toList()));
+  }
+
+  @Test
+  public void testDeleteNotFound() {
+    try {
+      service.delete(PURCHASE_NOT_FOUND_ID);
+      fail("Should call DeleteNotFoundException during deleting not existing Purchase");
+    } catch (Exception e) {
+      //TODO I want NotFoundException here
+      //} catch (NotFoundException e){
     }
-
-    @Test
-    public void getNotFound() {
-        try {
-            service.get(PURCHASE_NOT_FOUND_ID);
-            fail("Should cause NotFoundException for not existing id");
-        } catch (NotFoundException e){
-            LOG.info("getNotFound test throws NotFoundException. OK");
-        }
-
-    }
-
-    @Test
-    public void getAll() {
-        MATCHER.assertCollectionEquals(
-                Arrays.asList(EXPECTED_PURCHASE1, EXPECTED_PURCHASE2, EXPECTED_PURCHASE3),
-                service.getAll());
-    }
-
-    @Test
-    public void getBetweenDateTimes() {
-        MATCHER.assertCollectionEquals(
-                Arrays.asList(EXPECTED_PURCHASE2, EXPECTED_PURCHASE3),
-                service.getBetweenDateTimes(
-                        LocalDate.of(2018, 1, 10),
-                        LocalDate.of(2018, 3, 15)
-                ).stream().sorted(Comparator.comparing(Purchase::getCreatedDate)).collect(Collectors.toList()));
-    }
-
-    @Test
-    public void update() {
-
-        Purchase updated = new Purchase(
-                1000,
-                LocalDate.of(3000, 1, 1),
-                "myCategory",
-                "myComment");
-        updated.setId(PURCHASE1_ID);
-
-        service.save(updated);
-        MATCHER.assertEquals(updated, service.get(PURCHASE1_ID));
-
-
-    }
-
-    @Test
-    public void delete() {
-        service.delete(PURCHASE2_ID);
-
-        MATCHER.assertCollectionEquals(
-                Arrays.asList(EXPECTED_PURCHASE1, EXPECTED_PURCHASE3),
-                service.getAll()
-                        .stream()
-                        .sorted(Comparator.comparing(Purchase::getCreatedDate)).collect(Collectors.toList()));
-    }
-
-    @Test
-    public void testDeleteNotFound() {
-        try {
-            service.delete(PURCHASE_NOT_FOUND_ID);
-            fail("Should call DeleteNotFoundException during deleting not existing Purchase");
-        } catch (Exception e) {
-            //TODO I want NotFoundException here
-            //} catch (NotFoundException e){
-        }
-    }
+  }
 
 }

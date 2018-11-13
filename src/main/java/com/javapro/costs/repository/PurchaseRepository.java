@@ -9,13 +9,13 @@ import java.util.List;
  * Created by Vladimir_Vysokomorny on 29-Jun-17.
  */
 public interface PurchaseRepository {
-    Purchase get(long id);
+  Purchase get(long id);
 
-    Purchase save(Purchase purchase);
+  Purchase save(Purchase purchase);
 
-    boolean delete(long id);
+  boolean delete(long id);
 
-    List<Purchase> getAll();
+  List<Purchase> getAll();
 
-    List<Purchase> getBetween(LocalDate start, LocalDate end);
+  List<Purchase> getBetween(LocalDate start, LocalDate end);
 }

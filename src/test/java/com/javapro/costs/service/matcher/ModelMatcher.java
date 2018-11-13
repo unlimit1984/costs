@@ -12,52 +12,52 @@ import java.util.stream.Collectors;
  */
 public class ModelMatcher<T> {
 
-    private final Comparator<T> comparator;
+  private final Comparator<T> comparator;
 
-    public ModelMatcher() {
-        this((T expected, T actual) ->
-                expected == actual ? 0 : String.valueOf(expected).compareTo(String.valueOf(actual)));
+  public ModelMatcher() {
+    this((T expected, T actual) ->
+        expected == actual ? 0 : String.valueOf(expected).compareTo(String.valueOf(actual)));
+  }
+
+  public ModelMatcher(Comparator<T> comparator) {
+    this.comparator = comparator;
+  }
+
+  private class Wrapper {
+    private final T entity;
+
+    private Wrapper(T entity) {
+      this.entity = entity;
     }
 
-    public ModelMatcher(Comparator<T> comparator) {
-        this.comparator = comparator;
-    }
-
-    private class Wrapper {
-        private final T entity;
-
-        private Wrapper(T entity) {
-            this.entity = entity;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Wrapper that = (Wrapper) o;
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      Wrapper that = (Wrapper) o;
 //            return entity != null ? comparator.compare(entity, that.entity) : that.entity == null;
-            return entity != null ? (comparator.compare(entity, that.entity) == 0) : that.entity == null;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(entity);
-        }
+      return entity != null ? (comparator.compare(entity, that.entity) == 0) : that.entity == null;
     }
 
-    public void assertEquals(T expected, T actual) {
-        Assert.assertEquals(wrap(expected), wrap(actual));
+    @Override
+    public String toString() {
+      return String.valueOf(entity);
     }
+  }
 
-    public void assertCollectionEquals(Collection<T> expected, Collection<T> actual) {
-        Assert.assertEquals(wrap(expected), wrap(actual));
-    }
+  public void assertEquals(T expected, T actual) {
+    Assert.assertEquals(wrap(expected), wrap(actual));
+  }
 
-    private Wrapper wrap(T entity) {
-        return new Wrapper(entity);
-    }
+  public void assertCollectionEquals(Collection<T> expected, Collection<T> actual) {
+    Assert.assertEquals(wrap(expected), wrap(actual));
+  }
 
-    private List<Wrapper> wrap(Collection<T> collection) {
-        return collection.stream().map(this::wrap).collect(Collectors.toList());
-    }
+  private Wrapper wrap(T entity) {
+    return new Wrapper(entity);
+  }
+
+  private List<Wrapper> wrap(Collection<T> collection) {
+    return collection.stream().map(this::wrap).collect(Collectors.toList());
+  }
 }

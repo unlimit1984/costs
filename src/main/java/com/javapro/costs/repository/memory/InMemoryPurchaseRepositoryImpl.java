@@ -16,36 +16,36 @@ import java.util.stream.Collectors;
  */
 public class InMemoryPurchaseRepositoryImpl implements PurchaseRepository {
 
-    private final Map<Long, Purchase> repository = new ConcurrentHashMap<>();
-    private final AtomicLong counter = new AtomicLong(0);
+  private final Map<Long, Purchase> repository = new ConcurrentHashMap<>();
+  private final AtomicLong counter = new AtomicLong(0);
 
-    @Override
-    public Purchase get(long id) {
-        return repository.get(id);
-    }
+  @Override
+  public Purchase get(long id) {
+    return repository.get(id);
+  }
 
-    @Override
-    public Purchase save(Purchase purchase) {
-        if (purchase.isNew()) {
-            purchase.setId(counter.getAndIncrement());
-        }
-        repository.put(purchase.getId(), purchase);
-        return purchase;
+  @Override
+  public Purchase save(Purchase purchase) {
+    if (purchase.isNew()) {
+      purchase.setId(counter.getAndIncrement());
     }
+    repository.put(purchase.getId(), purchase);
+    return purchase;
+  }
 
-    @Override
-    public boolean delete(long id) {
-        return repository.remove(id) != null;
-    }
+  @Override
+  public boolean delete(long id) {
+    return repository.remove(id) != null;
+  }
 
-    @Override
-    public List<Purchase> getAll() {
-        return new ArrayList<>(repository.values());
-    }
+  @Override
+  public List<Purchase> getAll() {
+    return new ArrayList<>(repository.values());
+  }
 
-    @Override
-    public List<Purchase> getBetween(LocalDate start, LocalDate end) {
-        return repository.values().stream().filter(p ->
-                start.compareTo(p.getCreatedDate()) >= 0 && end.compareTo(p.getCreatedDate()) <= 0).collect(Collectors.toList());
-    }
+  @Override
+  public List<Purchase> getBetween(LocalDate start, LocalDate end) {
+    return repository.values().stream().filter(p ->
+        start.compareTo(p.getCreatedDate()) >= 0 && end.compareTo(p.getCreatedDate()) <= 0).collect(Collectors.toList());
+  }
 }

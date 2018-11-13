@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface DataJpaPurchaseRepository extends JpaRepository<Purchase, Long> {
 
-    @SuppressWarnings("JpaQlInspection")
-    @Query("SELECT p from Purchase p WHERE p.createdDate BETWEEN :startDate AND :endDate ORDER BY p.createdDate DESC")
-    List<Purchase> getBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+  @SuppressWarnings("JpaQlInspection")
+  @Query("SELECT p from Purchase p WHERE p.createdDate BETWEEN :startDate AND :endDate ORDER BY p.createdDate DESC")
+  List<Purchase> getBetween(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

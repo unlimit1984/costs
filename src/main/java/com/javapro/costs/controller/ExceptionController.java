@@ -10,11 +10,11 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class ExceptionController {
 
-    @ExceptionHandler(Exception.class)
-    public ModelAndView allErrors(Exception e) {
+  @ExceptionHandler(Exception.class)
+  public ModelAndView allErrors(Exception e) {
 
-        ModelAndView mav = new ModelAndView("error");
-        mav.addObject("message", e);
-        return mav;
-    }
+    ModelAndView mav = new ModelAndView("error");
+    mav.addObject("message", e);
+    return mav;
+  }
 }

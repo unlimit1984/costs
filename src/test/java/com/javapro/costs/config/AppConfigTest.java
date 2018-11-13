@@ -20,53 +20,53 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan({
-        "com.javapro.costs.service"
+    "com.javapro.costs.service"
 })
 @EnableJpaRepositories("com.javapro.costs.repository.datajpa")
 @EnableTransactionManagement
 public class AppConfigTest {
 
 
-    @Bean
-    public DataSource dataSource() {
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        builder.setType(EmbeddedDatabaseType.DERBY).addScript("db/init_db.sql");
-        return builder.build();
-    }
+  @Bean
+  public DataSource dataSource() {
+    EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+    builder.setType(EmbeddedDatabaseType.DERBY).addScript("db/init_db.sql");
+    return builder.build();
+  }
 
-    @Bean
-    public JdbcTemplate jdbcTemplate() {
-        return new JdbcTemplate(dataSource());
-    }
+  @Bean
+  public JdbcTemplate jdbcTemplate() {
+    return new JdbcTemplate(dataSource());
+  }
 
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource());
-        em.setPackagesToScan("com.javapro.costs.model");
-        em.setJpaVendorAdapter(jpaVendorAdapter());
-        em.setJpaProperties(jpaProperties());
-        return em;
-    }
+  @Bean
+  public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+    em.setDataSource(dataSource());
+    em.setPackagesToScan("com.javapro.costs.model");
+    em.setJpaVendorAdapter(jpaVendorAdapter());
+    em.setJpaProperties(jpaProperties());
+    return em;
+  }
 
-    @Bean
-    public JpaVendorAdapter jpaVendorAdapter() {
-        return new HibernateJpaVendorAdapter();
-    }
+  @Bean
+  public JpaVendorAdapter jpaVendorAdapter() {
+    return new HibernateJpaVendorAdapter();
+  }
 
-    private Properties jpaProperties() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.DerbyTenSixDialect");
-        // properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
-        properties.put("hibernate.show_sql", "true");
-        properties.put("hibernate.format_sql", "true");
-        properties.put("hibernate.use_sql_comments", "true");
-        return properties;
-    }
+  private Properties jpaProperties() {
+    Properties properties = new Properties();
+    properties.put("hibernate.dialect", "org.hibernate.dialect.DerbyTenSixDialect");
+    // properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+    properties.put("hibernate.show_sql", "true");
+    properties.put("hibernate.format_sql", "true");
+    properties.put("hibernate.use_sql_comments", "true");
+    return properties;
+  }
 
-    @Bean
-    public PlatformTransactionManager transactionManager() {
-        EntityManagerFactory factory = entityManagerFactory().getObject();
-        return new JpaTransactionManager(factory);
-    }
+  @Bean
+  public PlatformTransactionManager transactionManager() {
+    EntityManagerFactory factory = entityManagerFactory().getObject();
+    return new JpaTransactionManager(factory);
+  }
 }
